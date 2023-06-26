@@ -1,0 +1,76 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create charities table
+      author: Selminaz Kerimli
+      changes:
+        - createTable:
+            tableName: charities
+            columns:
+                  - column:
+                      name: id
+                      type: bigint
+                      autoIncrement: true
+                      constraints:
+                        primaryKey: true
+                        nullable: false
+                  - column:
+                        name: logo
+                        type: varchar(255)
+                        remarks: logo of charity
+                        constraints:
+                          nullable: false
+                  - column:
+                        name: start_date
+                        type: date
+                        remarks: start date
+                        constraints:
+                          nullable: false
+                  - column:
+                        name: end_date
+                        type: date
+                        remarks: end date
+                        constraints:
+                          nullable: false
+                  - column:
+                        name: ordering
+                        type: bigint
+                        defaultValue: 1
+                        constraints:
+                          nullable: false
+                  - column:
+                        name: required_steps
+                        type: int
+                        remarks: charity required steps
+                        constraints:
+                          nullable: false
+                  - column:
+                        name: present_steps
+                        type: int
+                        remarks: charity present steps
+                        constraints:
+                          nullable: false
+                  - column:
+                        name: status
+                        type: varchar(16)
+                        remarks: status of charity
+                  - column:
+                        name: created_at
+                        type: timestamp
+                        defaultValue: now()
+                        constraints:
+                          nullable: false
+                        remarks: created time of charity
+                  - column:
+                        name: updated_at
+                        type: timestamp
+                        defaultValue: now()
+                        constraints:
+                          nullable: false
+                        remarks: updated time of charity
+                  - column:
+                        name: deleted_at
+                        type: timestamp
+                        remarks: deleted time of charity
+
+
+            remarks: Table to store charities

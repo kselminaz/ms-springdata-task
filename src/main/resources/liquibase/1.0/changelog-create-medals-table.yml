@@ -1,0 +1,65 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create medals table
+      author: Selminaz Kerimli
+      changes:
+        - createTable:
+            tableName: medals
+            columns:
+                  - column:
+                      name: id
+                      type: bigint
+                      autoIncrement: true
+                      constraints:
+                        primaryKey: true
+                        nullable: false
+                  - column:
+                      name: image
+                      type: varchar(255)
+                  - column:
+                      name: steps
+                      type: bigint
+                      constraints:
+                        nullable: false
+                  - column:
+                      name: is_periodic
+                      type: boolean
+                      defaultValue: false
+                      constraints:
+                        nullable: false
+                  - column:
+                      name: medal_type
+                      type: varchar(16)
+                      constraints:
+                        nullable: false
+                  - column:
+                      name: charity_id
+                      type: bigint
+                  - column:
+                      name: progress_rate
+                      type: int
+                      defaultValue: 0
+                      constraints:
+                        nullable: false
+                      remarks: progress rate of charity with percentage
+                  - column:
+                      name: status
+                      type: varchar(16)
+                      constraints:
+                        nullable: false
+                  - column:
+                      name: created_at
+                      type: timestamp
+                      defaultValue: now()
+                      constraints:
+                        nullable: false
+                  - column:
+                      name: updated_at
+                      type: timestamp
+                      defaultValue: now()
+                      constraints:
+                        nullable: false
+                  - column:
+                      name: deleted_at
+                      type: timestamp
+
