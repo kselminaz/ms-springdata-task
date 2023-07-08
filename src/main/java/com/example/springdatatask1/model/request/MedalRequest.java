@@ -13,9 +13,10 @@ public class MedalRequest {
 
     private String image;
     private Long steps;
-    private boolean isPeriodic;
+    private Boolean isPeriodic;
     private MedalType medalType;
     private Long charityId;
     private int progressRate;
+
 
 }

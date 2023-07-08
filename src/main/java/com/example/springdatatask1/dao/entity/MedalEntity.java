@@ -32,8 +32,7 @@ public class MedalEntity {
 
     private Long steps;
 
-    @Column(name = "is_periodic")
-    private boolean isPeriodic;
+    private boolean periodic;
 
     @Enumerated(STRING)
     private MedalType medalType;

@@ -19,7 +19,7 @@ public class MedalResponse {
     private Long id;
     private String image;
     private Long steps;
-    private boolean isPeriodic;
+    private boolean periodic;
     private MedalType medalType;
     private Long charityId;
     private int progressRate;

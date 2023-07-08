@@ -5,8 +5,7 @@ import com.example.springdatatask1.model.enums.CharityStatus;
 import com.example.springdatatask1.model.request.CharityRequest;
 import com.example.springdatatask1.model.request.UpdateCharityRequest;
 import com.example.springdatatask1.model.response.CharityResponse;
-
-import java.time.LocalDate;
+import com.example.springdatatask1.model.response.PageableCharityResponse;
 
 public class CharityMapper {
 
@@ -46,6 +45,21 @@ public class CharityMapper {
                         charity.setEndDate(request.getEndDate());
                         charity.setRequiredSteps(request.getRequiredSteps());
                         charity.setPresentSteps(request.getPresentSteps());
+
+    }
+    public static PageableCharityResponse buildPageableCharityResponse(CharityEntity charity){
+
+            return PageableCharityResponse.builder()
+
+                    .id(charity.getId())
+                    .logo(charity.getLogo())
+                    .startDate(charity.getStartDate())
+                    .endDate(charity.getEndDate())
+                    .ordering(charity.getOrdering())
+                    .status(charity.getStatus())
+                    .requiredSteps(charity.getRequiredSteps())
+                    .presentSteps(charity.getPresentSteps())
+                    .build();
 
     }
 }

@@ -1,10 +1,15 @@
 package com.example.springdatatask1.controller;
 
+import com.example.springdatatask1.dao.entity.CharityEntity;
+import com.example.springdatatask1.model.criteria.CharityCriteria;
+import com.example.springdatatask1.model.criteria.PageCriteria;
+import com.example.springdatatask1.model.request.CharityDonationRequest;
 import com.example.springdatatask1.model.request.CharityRequest;
 import com.example.springdatatask1.model.request.UpdateCharityRequest;
 import com.example.springdatatask1.model.response.CharityResponse;
 import com.example.springdatatask1.service.CharityService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,9 +46,21 @@ public class CharityController {
     public void deleteCharity(@PathVariable Long id){
         charityService.deleteCharity(id);
     }
-    @GetMapping
-    public List<CharityResponse> getAll(){
+   /* @GetMapping
+   public List<CharityResponse> getAll(){
         return charityService.getAll();
+    }*/
+
+    @GetMapping
+    public Page<CharityEntity> getCharities(PageCriteria pageCriteria, CharityCriteria charityCriteria){
+      return charityService.pageableCharityResponse(pageCriteria,charityCriteria);
     }
+    @PostMapping("/{id}/user-donate")
+    public void userDonate(@PathVariable Long id,@RequestBody CharityDonationRequest request){
+
+         charityService.charityDonate(id,request);
+
+    }
+
 
 }

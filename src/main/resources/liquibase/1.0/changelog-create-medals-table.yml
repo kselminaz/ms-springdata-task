@@ -22,7 +22,7 @@ databaseChangeLog:
                       constraints:
                         nullable: false
                   - column:
-                      name: is_periodic
+                      name: periodic
                       type: boolean
                       defaultValue: false
                       constraints:

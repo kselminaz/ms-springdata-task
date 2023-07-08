@@ -12,5 +12,5 @@ public class UpdateMedalRequest {
 
     private Long steps;
     private MedalType medalType;
-    private boolean isPeriodic;
+    private boolean periodic;
 }
