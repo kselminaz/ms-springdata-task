@@ -4,7 +4,8 @@ import com.example.springdatatask1.dao.entity.CharityEntity;
 import com.example.springdatatask1.dao.repository.CharityRepository
 import com.example.springdatatask1.mapper.CharityMapperTest
 import com.example.springdatatask1.model.enums.CharityStatus
-import com.example.springdatatask1.model.request.CharityRequest;
+import com.example.springdatatask1.model.request.CharityRequest
+import com.example.springdatatask1.model.request.UpdateCharityRequest;
 import io.github.benas.randombeans.EnhancedRandomBuilder;
 import io.github.benas.randombeans.api.EnhancedRandom
 import org.springframework.data.crossstore.ChangeSetPersister;
@@ -20,7 +21,7 @@ public class CharityServiceTest extends Specification {
     private CharityService charityService;
     private AsyncCharityDonateService asyncCharityDonateService;
 
-    def setup() {
+    void setup() {
         charityRepository=Mock();
         charityService=new CharityService(charityRepository,asyncCharityDonateService);
 
@@ -62,24 +63,40 @@ public class CharityServiceTest extends Specification {
     def "Test updateCharity success"(){
         given:
         def id=random.nextLong()
-        def request=random.nextObject(CharityRequest)
+        def request=random.nextObject(UpdateCharityRequest)
         def charityEntity=random.nextObject(CharityEntity)
         when:
         charityService.updateCharity(id,request)
         then:
         1 * charityRepository.findById(id) >> Optional.of(charityEntity)
         1 * charityRepository.save(charityEntity)
+        request.ordering==charityEntity.ordering
+        request.startDate==charityEntity.startDate
+        request.endDate==charityEntity.endDate
+        request.requiredSteps==charityEntity.requiredSteps
+        request.presentSteps==charityEntity.presentSteps
+
 
     }
 
     def "Test getAll method"(){
         given:
-        def charityEntity=random.nextObject(CharityEntity)
+        def charityEntity=random.nextObject(CharityEntity,"status")
+        charityEntity.status=CharityStatus.IN_PROGRESS;
+
         when:
         def actual=charityService.getAll();
         then:
         1 * charityRepository.findAll() >> List.of(charityEntity)
-        actual.stream().allMatch()
+        actual[0].id==charityEntity.id
+        actual[0].logo==charityEntity.logo
+        actual[0].startDate==charityEntity.startDate
+        actual[0].endDate==charityEntity.endDate
+        actual[0].ordering==charityEntity.ordering
+        actual[0].status==charityEntity.status
+        actual[0].requiredSteps==charityEntity.requiredSteps
+        actual[0].presentSteps==charityEntity.presentSteps
+
 
     }
 
