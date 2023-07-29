@@ -3,7 +3,7 @@ package com.example.springdatatask1.util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.Predicate;
+import jakarta.persistence.criteria.Predicate;
 
 public class PredicateUtil {
 

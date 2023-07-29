@@ -34,7 +34,6 @@ public class CharityService {
 
     private final CharityRepository charityRepository;
     private final AsyncCharityDonateService asyncCharityDonateService;
-
     public CharityResponse getCharityById(Long id){
         var charity=fetchCharityIfExist(id);
         return buildCharityResponse(charity);
@@ -94,5 +93,4 @@ public class CharityService {
         asyncCharityDonateService.saveUserDonation(id,request);
 
     }
-
 }

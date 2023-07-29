@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 
-import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Date;
 
 import static com.example.springdatatask1.util.PredicateUtil.applyLikePattern;
 
@@ -28,12 +28,9 @@ public class CharitySpecification implements Specification<CharityEntity> {
     @Override
     public Predicate toPredicate(Root<CharityEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 
-         Predicate pr1=cb.equal(root.get("status"),charityCriteria.getStatus());
-         Predicate pr2=cb.greaterThanOrEqualTo(root.get("startDate"),charityCriteria.getDateFrom());
-         Predicate pr3=cb.equal(root.get("requiredSteps"),charityCriteria.getRequiredSteps());
-     /*   var predicates= PredicateUtil.builder()
+        var predicates= PredicateUtil.builder()
                         .addNullSafety(charityCriteria.getStatus(),
-                                status-> cb.like(root.get("status"),applyLikePattern(status))
+                                status-> cb.equal(root.get("status"),status)
                         )
                         .addNullSafety(charityCriteria.getDateFrom(),
                                         dateFrom-> cb.greaterThanOrEqualTo(root.get("startDate"),dateFrom)
@@ -41,8 +38,8 @@ public class CharitySpecification implements Specification<CharityEntity> {
                         .addNullSafety(charityCriteria.getRequiredSteps(),
                                 requiredSteps->cb.equal(root.get("requiredSteps"),requiredSteps)
                         )
-                        .build();*/
-               return cb.and(pr1,pr3);
+                        .build();
+             return cb.and(predicates);
 
     }
 }
