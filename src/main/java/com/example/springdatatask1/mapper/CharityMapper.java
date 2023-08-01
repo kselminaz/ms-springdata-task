@@ -7,8 +7,8 @@ import com.example.springdatatask1.model.request.UpdateCharityRequest;
 import com.example.springdatatask1.model.response.CharityResponse;
 import com.example.springdatatask1.model.response.PageableCharityResponse;
 
-public class CharityMapper {
 
+public class CharityMapper{
     public static CharityResponse buildCharityResponse(CharityEntity charity){
 
         return CharityResponse.builder()
@@ -62,4 +62,8 @@ public class CharityMapper {
                     .build();
 
     }
+
+
+
+
 }

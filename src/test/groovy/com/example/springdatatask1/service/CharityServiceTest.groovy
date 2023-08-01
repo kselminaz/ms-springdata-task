@@ -2,6 +2,7 @@ package com.example.springdatatask1.service;
 
 import com.example.springdatatask1.dao.entity.CharityEntity;
 import com.example.springdatatask1.dao.repository.CharityRepository
+import com.example.springdatatask1.mapper.CharityMapper
 import com.example.springdatatask1.mapper.CharityMapperTest
 import com.example.springdatatask1.model.enums.CharityStatus
 import com.example.springdatatask1.model.request.CharityRequest
@@ -96,6 +97,19 @@ public class CharityServiceTest extends Specification {
         actual[0].status==charityEntity.status
         actual[0].requiredSteps==charityEntity.requiredSteps
         actual[0].presentSteps==charityEntity.presentSteps
+
+
+    }
+    def "TestSaveCharity"(){
+        given:
+        def request=random.nextObject(CharityRequest)
+        def charityEntity=CharityMapper.buildCharityEntity(request)
+        when:
+        charityService.saveCharity(request)
+        then:
+        1 * charityRepository.save(charityEntity)
+
+
 
 
     }
