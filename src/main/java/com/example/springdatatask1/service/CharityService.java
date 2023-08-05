@@ -65,20 +65,27 @@ public class CharityService {
         charityRepository.save(charity);
     }
 
+    public void  updateCharityWithParam(Long id,String status){
+
+        var charity=fetchCharityIfExist(id);
+        charity.setStatus(CharityStatus.valueOf(status));
+        charity.setUpdatedAt(LocalDateTime.now());
+        charityRepository.save(charity);
+    }
     private CharityEntity fetchCharityIfExist(Long id){
         return charityRepository.findById(id).orElseThrow(
                 ()->new RuntimeException("Charity not found")
         );
     }
 
-    public Page<CharityEntity> pageableCharityResponse(PageCriteria pageCriteria, CharityCriteria charityCriteria){
+    public PageableCharityResponse pageableCharityResponse(PageCriteria pageCriteria, CharityCriteria charityCriteria){
 
         var charityEntityPage=charityRepository.findAll(
                 new CharitySpecification(charityCriteria),
                 PageRequest.of(pageCriteria.getPage(), pageCriteria.getCount(), Sort.by("id").descending())
                 );
 
-        return charityEntityPage;
+        return buildPageableCharityResponse(charityEntityPage);
 
         /*List<CharityEntity> charities=charityEntityPage.getContent();
         return charities.stream().map(CharityMapper::buildCharityResponse).collect(Collectors.toList());

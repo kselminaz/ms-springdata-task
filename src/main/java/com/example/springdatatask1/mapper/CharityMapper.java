@@ -6,6 +6,9 @@ import com.example.springdatatask1.model.request.CharityRequest;
 import com.example.springdatatask1.model.request.UpdateCharityRequest;
 import com.example.springdatatask1.model.response.CharityResponse;
 import com.example.springdatatask1.model.response.PageableCharityResponse;
+import org.springframework.data.domain.Page;
+
+import java.util.stream.Collectors;
 
 
 public class CharityMapper{
@@ -47,18 +50,14 @@ public class CharityMapper{
                         charity.setPresentSteps(request.getPresentSteps());
 
     }
-    public static PageableCharityResponse buildPageableCharityResponse(CharityEntity charity){
+    public static PageableCharityResponse buildPageableCharityResponse(Page<CharityEntity> charityPage){
 
             return PageableCharityResponse.builder()
 
-                    .id(charity.getId())
-                    .logo(charity.getLogo())
-                    .startDate(charity.getStartDate())
-                    .endDate(charity.getEndDate())
-                    .ordering(charity.getOrdering())
-                    .status(charity.getStatus())
-                    .requiredSteps(charity.getRequiredSteps())
-                    .presentSteps(charity.getPresentSteps())
+                    .charities(charityPage.getContent().stream().map(CharityMapper::buildCharityResponse).collect(Collectors.toList()))
+                    .hasNextPage(charityPage.hasNext())
+                    .lastPageNumber(charityPage.getTotalPages())
+                    .totalElements(charityPage.getTotalElements())
                     .build();
 
     }

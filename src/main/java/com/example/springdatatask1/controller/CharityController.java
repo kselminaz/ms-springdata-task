@@ -7,6 +7,7 @@ import com.example.springdatatask1.model.request.CharityDonationRequest;
 import com.example.springdatatask1.model.request.CharityRequest;
 import com.example.springdatatask1.model.request.UpdateCharityRequest;
 import com.example.springdatatask1.model.response.CharityResponse;
+import com.example.springdatatask1.model.response.PageableCharityResponse;
 import com.example.springdatatask1.service.CharityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -46,13 +47,19 @@ public class CharityController {
     public void deleteCharity(@PathVariable Long id){
         charityService.deleteCharity(id);
     }
+
+    @PatchMapping ("/{id}")
+    @ResponseStatus(NO_CONTENT)
+    public void updateCharityWithParam(@PathVariable Long id,@RequestParam String status){
+        charityService.updateCharityWithParam(id,status);
+    }
    /* @GetMapping
    public List<CharityResponse> getAll(){
         return charityService.getAll();
     }*/
 
     @GetMapping
-    public Page<CharityEntity> getCharities(PageCriteria pageCriteria, CharityCriteria charityCriteria){
+    public PageableCharityResponse getCharities(PageCriteria pageCriteria, CharityCriteria charityCriteria){
       return charityService.pageableCharityResponse(pageCriteria,charityCriteria);
     }
     @PostMapping("/{id}/user-donate")
