@@ -202,7 +202,7 @@ public class CharityServiceTest extends Specification {
                 .presentSteps(request.getPresentSteps())
                 .build()
         when:
-        charityService.saveCharity(request)
+        def actual=charityService.saveCharity(request)
         then:
         1 * charityRepository.save(charityEntity)
 
