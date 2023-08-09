@@ -14,6 +14,7 @@ import com.example.springdatatask1.service.specification.CharitySpecification;
 import io.github.benas.randombeans.EnhancedRandomBuilder;
 import io.github.benas.randombeans.api.EnhancedRandom
 import org.springframework.data.crossstore.ChangeSetPersister
+import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort;
 import spock.lang.Specification
@@ -212,13 +213,13 @@ public class CharityServiceTest extends Specification {
         given:
          def pageCriteria=random.nextObject(PageCriteria)
          def charityCriteria=random.nextObject(CharityCriteria)
-
+         def page=Mock(Page<CharityEntity>)
         when:
         def actual=charityService.pageableCharityResponse(pageCriteria,charityCriteria)
         then:
         1 * charityRepository.findAll(new CharitySpecification(charityCriteria),
         PageRequest.of(pageCriteria.getPage(), pageCriteria.getCount(), Sort.by("id").descending()))
-        >> PageableCharityResponse
+        >> page
 
     }
 

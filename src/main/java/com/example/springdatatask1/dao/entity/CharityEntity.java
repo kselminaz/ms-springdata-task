@@ -53,8 +53,9 @@ import static jakarta.persistence.GenerationType.IDENTITY;
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
-            CharityEntity charity = (CharityEntity) o;
-            return id.equals(charity.id);
+            CharityEntity that = (CharityEntity) o;
+           // return id.equals(charity.id);
+            return Objects.equals(id,that.id);
         }
 
         @Override
